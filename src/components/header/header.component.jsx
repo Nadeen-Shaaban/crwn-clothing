@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import "./header.styles.scss";
 import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropdown from "../cart/cart-dropdown.component";
 
 const Header = () => (
   <div className="header">
@@ -18,6 +19,7 @@ const Header = () => (
       </Link>
       <CartIcon />
     </div>
+    <CartDropdown />
   </div>
 );
 
