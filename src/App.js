@@ -14,6 +14,7 @@ import Header from "./components/header/header.component";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { setCurrentUser } from "./redux/user/user.actions";
 import { selectCurrentUser } from "./redux/user/user.selectors";
+// import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 //import { render } from "sass";
 //=======
 //>>>>>>> 3445cfc1a417ad7e1c6f456adf73d03ce6f66301
@@ -69,6 +70,7 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  // collectionsArray: selectCollectionsForPreview,
 });
 
 const mapDispatchToProps = (dispatch) => ({
