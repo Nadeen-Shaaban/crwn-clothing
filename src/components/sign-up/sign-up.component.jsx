@@ -1,44 +1,46 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
+
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
-//import { createUserProfileDocument } from "../../firebase/firebase.utils";
-import "./sign-up.styles.scss";
+
 import { signUpStart } from "../../redux/user/user.actions";
 
-const SignUp = ({ signUpStart }) => {
+import { SignUpContainer, SignUpTitle } from "./sign-up.styles";
+
+const SignUp = () => {
   const [userCredentials, setUserCredentials] = useState({
     displayName: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-
   const { displayName, email, password, confirmPassword } = userCredentials;
+
+  const dispatch = useDispatch();
+  const signUpStartHandler = (userCredentials) =>
+    dispatch(signUpStart(userCredentials));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // console.log(this.props);
 
     if (password !== confirmPassword) {
       alert("passwords don't match");
       return;
     }
-    // console.log("data", { displayName, email, password });
 
-    signUpStart({ displayName, email, password });
-
-    //await createUserProfileDocument(user, { displayName });
+    signUpStartHandler({ displayName, email, password });
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
+
     setUserCredentials({ ...userCredentials, [name]: value });
   };
 
   return (
-    <div className="sign-up">
-      <h2 className="title">I don't have an account</h2>
+    <SignUpContainer>
+      <SignUpTitle>I do not have a account</SignUpTitle>
       <span>Sign up with your email and password</span>
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <FormInput
@@ -75,11 +77,8 @@ const SignUp = ({ signUpStart }) => {
         />
         <CustomButton type="submit">SIGN UP</CustomButton>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  signUpStart: (userCredentials) => dispatch(signUpStart(userCredentials)),
-});
-export default connect(null, mapDispatchToProps)(SignUp);
+export default SignUp;
